@@ -107,3 +107,4 @@ echo "Reloading env cfg..."
 exec bash
 
 echo "Finished installation!"
+exit 0
