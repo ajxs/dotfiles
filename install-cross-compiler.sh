@@ -1,17 +1,13 @@
 #!/bin/bash
 
+source ./_shared.sh
+
 # Script to download and install cross-compilers
 # This script will download the script tar, unzip it to a local install directory
-# then add the bin path to your environment vars
-
+# then add the bin path to your environment vars.
 
 print_usage() {
 	echo "Usage: $0 [-c <string>]" 1>&2
-	exit 1
-}
-
-die_with_message() {
-	echo "$1"
 	exit 1
 }
 

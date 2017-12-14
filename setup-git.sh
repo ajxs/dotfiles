@@ -1,23 +1,9 @@
 #!/bin/bash
 
-# Script to setup git
+source ./_shared.sh
 
-die_with_message() {
-	echo "$1"
-	exit 1
-}
 
-# check if a package is installed, and install it if not.
-check_install_package() {
-	CHECK_PACKAGE="${1}"
-	dpkg -s "${CHECK_PACKAGE}" > /dev/null 2>&1
-	INSTALL_STATUS="$?"
-	if [ "${INSTALL_STATUS}" -ne 0 ]; then
-		sudo apt-get install "${CHECK_PACKAGE}" --yes || die_with_message "Installation failed"
-	else
-		echo "${CHECK_PACKAGE} is already installed!"
-	fi
-}
+# Script to setup git and apply my personal configuration options.
 
 PROGRAMS=("git" "vim")
 for PROGRAM in "${PROGRAMS[@]}"; do
