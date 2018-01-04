@@ -38,7 +38,7 @@ install_tar_to_usr_bin() {
 		echo "Downloaded to ${LOCAL_FILE}"
 	fi
 
-	echo "Extracting archive to ${LOCAL_FILE}..."
+	echo "Extracting archive to ${TEMP_DIR}/${LOCAL_FILE}..."
 	tar xf "${LOCAL_FILE}" -C "${TEMP_DIR}" || die_with_message "Failure Unzipping archive! Exiting."
 	echo "Archive extraction complete."
 
