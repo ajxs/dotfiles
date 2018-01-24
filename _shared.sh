@@ -16,6 +16,28 @@ check_install_package() {
 }
 
 
+check_for_local_download() {
+	FILE_URL="${1}"
+	if [ -z "${FILE_URL}" ]; then
+		exit 1
+	fi
+
+	FILE_NAME="${FILE_URL##*/}"
+
+	DOWNLOAD_DIR="${HOME}/Downloads"
+	LOCAL_DOWNLOADED_COPY="${DOWNLOAD_DIR}/${FILE_NAME}"
+
+	# check if we have a local downloaded copy already
+	if [ -e ${LOCAL_DOWNLOADED_COPY} ]; then
+		echo ${LOCAL_DOWNLOADED_COPY}
+	else
+		TEMP_DIR="$(mktemp -d)"
+		wget -q "${FILE_URL}" -P "${TEMP_DIR}" || exit 1
+		echo ${TEMP_DIR}/${FILE_NAME}
+	fi
+}
+
+
 install_tar_to_usr_bin() {
 	TAR_URL="${1}"
 	USR_BIN_PATH="/usr/local/bin"
@@ -23,20 +45,7 @@ install_tar_to_usr_bin() {
 	ARCHIVE_NAME="${TAR_URL##*/}"
 
 	# check if we have a local downloaded copy already
-	DOWNLOAD_DIR="${HOME}/Downloads"
-	LOCAL_DOWNLOADED_COPY="${DOWNLOAD_DIR}/${ARCHIVE_NAME}"
-
-	TEMP_DIR="$(mktemp -d)"
-
-	if [ -e ${LOCAL_DOWNLOADED_COPY} ]; then
-		echo "Found local copy of tar at ${LOCAL_DOWNLOADED_COPY}..."
-		LOCAL_FILE="${LOCAL_DOWNLOADED_COPY}"
-	else
-		echo "Downloading from ${CROSS_COMPILER_TAR_URL} to ${TEMP_DIR}..."
-		wget "${TAR_URL}" -P "${TEMP_DIR}" || die_with_message "Failure downloading archive! Exiting."
-		LOCAL_FILE="${TEMP_DIR}/${ARCHIVE_NAME}"
-		echo "Downloaded to ${LOCAL_FILE}"
-	fi
+	LOCAL_FILE=$(check_for_local_download "${TAR_URL}")
 
 	echo "Extracting archive to ${TEMP_DIR}/${LOCAL_FILE}..."
 	tar xf "${LOCAL_FILE}" -C "${TEMP_DIR}" || die_with_message "Failure Unzipping archive! Exiting."
