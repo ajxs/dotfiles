@@ -66,7 +66,7 @@ else
 fi
 
 
-LOCAL_FILENAME="$(basename ${CROSS_COMPILER_TAR_URL})"
+LOCAL_FILENAME="${CROSS_COMPILER_TAR_URL##*/}"
 FULL_DEST_DIR="${LOCAL_INSTALL_DIR}/${UNZIPPED_DIR_NAME}"
 
 if [ -d "${FULL_DEST_DIR}" ]; then
@@ -75,20 +75,7 @@ fi
 
 
 # check if we have a local downloaded copy already - useful for testing
-DOWNLOAD_DIR="${HOME}/Downloads"
-LOCAL_DOWNLOADED_COPY="${DOWNLOAD_DIR}/${LOCAL_FILENAME}"
-
-if [ -e ${LOCAL_DOWNLOADED_COPY} ]; then
-	echo "Found local copy of tar at ${LOCAL_DOWNLOADED_COPY}..."
-	LOCAL_FILE="${LOCAL_DOWNLOADED_COPY}"
-else
-	TEMP_DIR="$(mktemp -d)"
-
-	echo "Downloading compiler from ${CROSS_COMPILER_TAR_URL} to ${TEMP_DIR}..."
-	wget "${CROSS_COMPILER_TAR_URL}" -P "${TEMP_DIR}" || die_with_message "Failure downloading archive! Exiting."
-	LOCAL_FILE="${TEMP_DIR}/${LOCAL_FILENAME}"
-	echo "Downloaded to ${LOCAL_FILE}"
-fi
+LOCAL_FILE=$(check_for_local_download "${CROSS_COMPILER_TAR_URL}")
 
 echo "Extracting archive to ${FULL_DEST_DIR}..."
 tar xf "${LOCAL_FILE}" -C "${LOCAL_INSTALL_DIR}" || die_with_message "Failure Unzipping archive! Exiting."

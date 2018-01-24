@@ -41,13 +41,13 @@ check_for_local_download() {
 install_tar_to_usr_bin() {
 	TAR_URL="${1}"
 	USR_BIN_PATH="/usr/local/bin"
+	echo "Installing from ${TAR_URL} to ${USR_BIN_PATH}..."
 
-	ARCHIVE_NAME="${TAR_URL##*/}"
-
-	# check if we have a local downloaded copy already
 	LOCAL_FILE=$(check_for_local_download "${TAR_URL}")
+	ARCHIVE_NAME="${LOCAL_FILE##*/}"
 
-	echo "Extracting archive to ${TEMP_DIR}/${LOCAL_FILE}..."
+	TEMP_DIR="$(mktemp -d)"
+	echo "Extracting archive to ${TEMP_DIR}..."
 	tar xf "${LOCAL_FILE}" -C "${TEMP_DIR}" || die_with_message "Failure Unzipping archive! Exiting."
 	echo "Archive extraction complete."
 

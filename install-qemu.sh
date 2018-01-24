@@ -15,18 +15,9 @@ DOWNLOAD_DIR="${HOME}/Downloads"
 LOCAL_DOWNLOADED_COPY="${DOWNLOAD_DIR}/${ARCHIVE_NAME}"
 
 TEMP_DIR="$(mktemp -d)"
+LOCAL_FILE=$(check_for_local_download "${TAR_URL}")
 
-if [ -e ${LOCAL_DOWNLOADED_COPY} ]; then
-	echo "Found local copy of tar at ${LOCAL_DOWNLOADED_COPY}..."
-	LOCAL_FILE="${LOCAL_DOWNLOADED_COPY}"
-else
-	echo "Downloading from ${CROSS_COMPILER_TAR_URL} to ${TEMP_DIR}..."
-	wget "${TAR_URL}" -P "${TEMP_DIR}" || die_with_message "Failure downloading archive! Exiting."
-	LOCAL_FILE="${TEMP_DIR}/${ARCHIVE_NAME}"
-	echo "Downloaded to ${LOCAL_FILE}"
-fi
-
-echo "Extracting archive to ${TEMP_DIR}/${LOCAL_FILE}..."
+echo "Extracting archive to ${TEMP_DIR}..."
 tar xf "${LOCAL_FILE}" -C "${TEMP_DIR}" || die_with_message "Failure Unzipping archive! Exiting."
 
 cd "${TEMP_DIR}/${ARCHIVE_DIR_NAME}"
