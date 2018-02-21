@@ -7,16 +7,12 @@ source ./_shared.sh
 # which doesn't support raspi2 emulation
 
 TAR_URL="https://download.qemu.org/qemu-2.11.0.tar.xz"
-ARCHIVE_NAME="${TAR_URL##*/}"
-
-ARCHIVE_DIR_NAME="$(basename ${ARCHIVE_NAME} .tar.xz)"
-
-DOWNLOAD_DIR="${HOME}/Downloads"
-LOCAL_DOWNLOADED_COPY="${DOWNLOAD_DIR}/${ARCHIVE_NAME}"
-
-TEMP_DIR="$(mktemp -d)"
 LOCAL_FILE=$(check_for_local_download "${TAR_URL}")
 
+ARCHIVE_NAME="${LOCAL_FILE##*/}"
+ARCHIVE_DIR_NAME="$(basename ${ARCHIVE_NAME} .tar.xz)"
+
+TEMP_DIR="$(mktemp -d)"
 echo "Extracting archive to ${TEMP_DIR}..."
 tar xf "${LOCAL_FILE}" -C "${TEMP_DIR}" || die_with_message "Failure Unzipping archive! Exiting."
 
