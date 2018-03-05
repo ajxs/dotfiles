@@ -1,0 +1,16 @@
+"*":
+  core:
+    telemetryConsent: "limited"
+    themes: [
+      "one-dark-ui"
+      "firewatch-syntax"
+    ]
+  editor:
+    fontSize: 13
+    lineHeight: 1.35
+    showIndentGuide: true
+    showInvisibles: true
+    softTabs: false
+    tabType: "hard"
+  welcome:
+    showOnStartup: false

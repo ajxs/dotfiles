@@ -75,7 +75,7 @@ fi
 
 
 # check if we have a local downloaded copy already - useful for testing
-LOCAL_FILE=$(check_for_local_download "${CROSS_COMPILER_TAR_URL}")
+LOCAL_FILE=$(check_for_local_download "${CROSS_COMPILER_TAR_URL}") || die_with_message "Failed to download/locate package! Exiting."
 
 echo "Extracting archive to ${FULL_DEST_DIR}..."
 tar xf "${LOCAL_FILE}" -C "${LOCAL_INSTALL_DIR}" || die_with_message "Failure Unzipping archive! Exiting."
