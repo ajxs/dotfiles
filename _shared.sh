@@ -5,6 +5,16 @@ die_with_message() {
 	exit 1
 }
 
+
+prompt_to_confirm() {
+  read -n 1 -p "Please press ENTER to confirm." var
+  if [ ${#var} -ne 0 ]; then
+    echo "Aborted."
+    exit 0
+  fi
+}
+
+
 # check if a package is installed, and install it if not.
 check_install_package() {
 	local PKG_NAME="${1}"
