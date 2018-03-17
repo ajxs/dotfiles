@@ -19,6 +19,7 @@ git config --global user.name "Anthony"
 
 # setup git aliases
 git config --global alias.cam "commit -am"
+git config --global alias.cm "commit -m"
 git config --global alias.st "status"
 git config --global alias.aa "add -A"
 git config --global alias.uc "reset HEAD~"
