@@ -3,10 +3,10 @@
 source ./_shared.sh
 
 # Script to build qemu from latest src
-# Rationale is qemu-system-arm in Xenial repo is 2.5.0
+# Rationale is qemu-system-arm in Xenial repo is 2.0.0
 # which doesn't support raspi2 emulation
 
-TAR_URL="https://download.qemu.org/qemu-2.11.0.tar.xz"
+TAR_URL="https://download.qemu.org/qemu-2.11.1.tar.xz"
 LOCAL_FILE=$(check_for_local_download "${TAR_URL}")
 
 ARCHIVE_NAME="${LOCAL_FILE##*/}"
@@ -23,5 +23,5 @@ for PACKAGE in "${DEPENDENCIES[@]}"; do
 	check_install_package "${PACKAGE}"
 done
 
-source ./configure
-sudo make && sudo make install
+./configure --enable-fdt
+sudo make -j$(nproc) && sudo make install
