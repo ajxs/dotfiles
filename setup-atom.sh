@@ -5,7 +5,7 @@ source ./_shared.sh
 # script to configure Atom editor
 
 # Install user packages
-PACKAGES=("firewatch-syntax" "language-x86-64-assembly")
+PACKAGES=("firewatch-syntax" "language-x86-64-assembly" "git-blame")
 for PACKAGE in "${PACKAGES[@]}"; do
 	apm install "${PACKAGE}" || die_with_message "Failed executing apm! Exiting."
 done
