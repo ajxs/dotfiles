@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./_shared.sh
+source ./_shared.arch.sh
 
 
 # Script to setup git and apply my personal configuration options.

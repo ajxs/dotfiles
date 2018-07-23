@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./_shared.sh
+source ./_shared.deb.sh
 
 # Script to build qemu from latest src
 # Rationale is qemu-system-arm in Xenial repo is 2.0.0

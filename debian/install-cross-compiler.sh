@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./_shared.sh
+source ./_shared.deb.sh
 
 # Script to download and install cross-compilers
 # This script will download the script tar, unzip it to a local install directory
