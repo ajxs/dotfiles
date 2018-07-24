@@ -1,11 +1,11 @@
 #!/bin/bash
 
-source ./_shared.deb.sh
+source ./_shared.sh
 
 
 # Script to setup my personal environment.
 
-PROGRAMS=("i3" "terminator", "gnome-icon-theme", "thunar")
+PROGRAMS=("i3" "terminator" "gnome-icon-theme" "thunar" "cpanm")
 for PROGRAM in "${PROGRAMS[@]}"; do
 	check_install_package "${PROGRAM}"
 done

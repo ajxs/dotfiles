@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./_shared.deb.sh
+source ./_shared.sh
 
 # script to configure Atom editor
 
