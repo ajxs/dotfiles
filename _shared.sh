@@ -1,5 +1,23 @@
 #!/bin/bash
 
+# check if a package is installed, and install it if not.
+function check_install_package {
+	echo "Not implemented for this OS."
+	exit 1
+}
+
+
+# Apply OS-specific overloads
+
+if [ -f "/etc/arch-release" ]; then
+	source ./shared.arch.sh
+elif [ -f "/etc/lsb-release" ]; then
+	source ./shared.deb.sh
+elif [ "$(uname)" = "Darwin" ]; then
+	source ./shared.osx.sh
+fi
+
+
 function die_with_message {
 	echo "$1" >&2
 	exit 1
@@ -7,23 +25,10 @@ function die_with_message {
 
 
 function prompt_to_confirm {
-  read -n 1 -p "Please press ENTER to confirm." var
-  if [ ${#var} -ne 0 ]; then
-    echo "Aborted."
-    exit 0
-  fi
-}
-
-
-# check if a package is installed, and install it if not.
-function check_install_package {
-	local PKG_NAME="${1}"
-	local PKG_STATUS=$(dpkg-query -W --showformat='${Status}\n' ${PKG_NAME} | grep "install ok installed")
-	if [ "" == "$PKG_STATUS" ]; then
-		echo "Intalling ${PKG_NAME}."
-		sudo apt-get --yes install "${PKG_NAME}"
-	else
-		echo "${PKG_NAME} is already installed."
+	read -n 1 -p "Please press ENTER to confirm." var
+	if [ ${#var} -ne 0 ]; then
+		echo "Aborted."
+		exit 0
 	fi
 }
 
@@ -37,7 +42,6 @@ function check_for_local_download {
 	fi
 
 	local FILE_NAME="${FILE_URL##*/}"
-
 	local DOWNLOAD_DIR="${HOME}/Downloads"
 	local LOCAL_DOWNLOADED_COPY="${DOWNLOAD_DIR}/${FILE_NAME}"
 
@@ -54,26 +58,8 @@ function check_for_local_download {
 }
 
 
-function install_tar_to_usr_bin {
-	local TAR_URL="${1}"
-	local USR_BIN_PATH="/usr/local/bin"
-	echo "Installing from ${TAR_URL} to ${USR_BIN_PATH}..."
-
-	local LOCAL_FILE=$(check_for_local_download "${TAR_URL}")
-	local ARCHIVE_NAME="${LOCAL_FILE##*/}"
-
-	local TEMP_DIR="$(mktemp -d)"
-	echo "Extracting archive to ${TEMP_DIR}..."
-	tar xf "${LOCAL_FILE}" -C "${TEMP_DIR}" || die_with_message "Failure Unzipping archive! Exiting."
-	echo "Archive extraction complete."
-
-	chmod +x "${TEMP_DIR}/."
-	sudo cp -a "${TEMP_DIR}/." "${USR_BIN_PATH}"
-	echo "Completed installation of ${ARCHIVE_NAME}"
-}
-
 # http://stefaanlippens.net/pretty-csv.html
 function view_csv {
 	# column -t -s, -n "$@" | less -F -S -X -K
-	perl -pe 's/((?<=\t)|(?<=^))\t/ \t/g;' "$@" | column -t -s $'\t' | less  -F -S -X -K
+	perl -pe 's/((?<=\t)|(?<=^))\t/ \t/g;' "$@" | column -t -s $'\t' | less	-F -S -X -K
 }
