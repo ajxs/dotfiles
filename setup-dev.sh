@@ -3,7 +3,12 @@
 source ./_shared.sh
 
 
-# Script to setup web dev environment.
+# Script to setup dev tools.
+
+PROGRAMS=("gcc-multilib")
+for PROGRAM in "${PROGRAMS[@]}"; do
+	check_install_package "${PROGRAM}"
+done
 
 # Install nvm
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
