@@ -13,7 +13,7 @@ done
 # Create boilerplate atom config - will overwrite!
 
 ATOM_CONFIG_DIR="${HOME}/.atom"
-cp "./_data/atom_config.cson" ${ATOM_CONFIG_DIR}/config.cson
+cp "./.config/atom_config.cson" ${ATOM_CONFIG_DIR}/config.cson
 
 echo "Finished config!"
 exit 0

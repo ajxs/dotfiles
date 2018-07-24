@@ -1,2 +1,2 @@
-# toolkit
-A toolkit of scripts I use for mundane tasks
+# .files
+A collection of configuration files and helper scripts to aid me in my daily responsibilities.
