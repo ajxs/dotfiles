@@ -63,3 +63,10 @@ function view_csv {
 	# column -t -s, -n "$@" | less -F -S -X -K
 	perl -pe 's/((?<=\t)|(?<=^))\t/ \t/g;' "$@" | column -t -s $'\t' | less	-F -S -X -K
 }
+
+
+# Takes a screenshot and copies it to the clipboard.
+function screenshot_region_to_clipboard {
+	echo "Not implemented for this OS."
+	exit 1
+}
