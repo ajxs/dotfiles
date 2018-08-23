@@ -7,21 +7,29 @@ function check_install_package {
 }
 
 
-# Apply OS-specific overloads
-
-if [ -f "/etc/arch-release" ]; then
-	source ./shared.arch.sh
-elif [ -f "/etc/lsb-release" ]; then
-	source ./shared.deb.sh
-elif [ "$(uname)" = "Darwin" ]; then
-	source ./shared.osx.sh
-fi
-
-
 function die_with_message {
 	echo "$1" >&2
 	exit 1
 }
+
+
+# Global var for referencing in subsequent scripts to check the OS.
+__DETECTED_SYSTEM__=""
+
+
+# Apply OS-specific overloads
+if [ -f "/etc/arch-release" ]; then
+	source ./_shared.arch.sh
+	__DETECTED_SYSTEM__="ARCH"
+elif [ -f "/etc/lsb-release" ]; then
+	source ./_shared.deb.sh
+	__DETECTED_SYSTEM__="DEBIAN"
+elif [ "$(uname)" = "Darwin" ]; then
+	source ./_shared.osx.sh
+	__DETECTED_SYSTEM__="OSX"
+else
+	die_with_message "Unable to determine Operating System! Exiting."
+fi
 
 
 function prompt_to_confirm {
