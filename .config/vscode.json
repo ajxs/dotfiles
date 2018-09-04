@@ -3,5 +3,19 @@
 	"editor.renderWhitespace": "all",
 	"editor.tabSize": 2,
 	"editor.insertSpaces": false,
-	"search.location": "panel"
+	"search.location": "panel",
+	"editor.rulers": [
+		80
+	],
+	"editor.minimap.enabled": false,
+	"window.zoomLevel": 0,
+	"[python]": {
+		"editor.renderWhitespace": "all",
+		"editor.tabSize": 4,
+		"editor.insertSpaces": true,
+		"files.trimTrailingWhitespace": true
+	},
+	"[javascript]": {
+		"files.trimTrailingWhitespace": true
+	}
 }
