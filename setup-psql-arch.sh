@@ -22,4 +22,5 @@ sudo -u postgres -i initdb --locale en_US.UTF-8 -E UTF8 -D ${PSQL_DATA_DIR}
 sudo -u postgres -i pg_ctl -D ${PSQL_DATA_DIR} -l logfile start
 
 # Start service.
+sudo systemctl enable postgresql.service
 sudo systemctl start postgresql.service

@@ -13,6 +13,14 @@ function die_with_message {
 }
 
 
+function append_to_bashrc() {
+	local TEXT="$1"
+	local BASHRC="${HOME}/.bashrc"
+
+	printf "%s\\n" "${TEXT}" >> "${BASHRC}"
+}
+
+
 # Global var for referencing in subsequent scripts to check the OS.
 __DETECTED_SYSTEM__=""
 
