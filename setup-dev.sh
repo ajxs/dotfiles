@@ -19,7 +19,7 @@ fi
 # Install nvm
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 # Reload shell, then install node
-source ~/.bashrc
+source ${HOME}/.bashrc
 nvm install 9
 
 
