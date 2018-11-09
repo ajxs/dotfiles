@@ -39,6 +39,9 @@ if [ -f "/etc/arch-release" ]; then
 elif [ -f "/etc/lsb-release" ]; then
 	source ./_shared.deb.sh
 	__DETECTED_SYSTEM__="DEBIAN"
+elif [ -f "/etc/redhat-release" ]; then
+	source ./_shared.fedora.sh
+	__DETECTED_SYSTEM__="FEDORA"
 elif [ "$(uname)" = "Darwin" ]; then
 	source ./_shared.osx.sh
 	__DETECTED_SYSTEM__="OSX"
