@@ -28,6 +28,14 @@ function append_to_bashrc() {
 }
 
 
+function append_to_PATH() {
+	local DIR="$1"
+	local PATH_STRING='PATH=$PATH:'
+
+	append_to_bashrc "${PATH_STRING}${DIR}"
+}
+
+
 # Global var for referencing in subsequent scripts to check the OS.
 __DETECTED_SYSTEM__=""
 

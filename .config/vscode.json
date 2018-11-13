@@ -17,5 +17,9 @@
 	},
 	"[javascript]": {
 		"files.trimTrailingWhitespace": true
+	},
+	"[typescript]": {
+		"editor.insertSpaces": false,
+		"files.trimTrailingWhitespace": true
 	}
 }
