@@ -10,7 +10,7 @@ function print_usage {
   exit 0
 }
 
-PROGRAMS=("i3" "i3status" "dmenu" "i3lock" "xbacklight" "xautolock" "feh" "conky" "nm-applet" "volumeicon")
+PROGRAMS=("i3" "i3status" "dmenu" "i3lock" "xbacklight" "xautolock" "feh" "nm-applet" "volumeicon" "ncdu" "redshift-gtk")
 for PROGRAM in "${PROGRAMS[@]}"; do
 	check_install_package "${PROGRAM}"
 done
