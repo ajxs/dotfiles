@@ -16,15 +16,20 @@ if [[ "${__DETECTED_SYSTEM__}" != "ARCH" ]]; then
 fi
 
 
+if [[ "${__DETECTED_SYSTEM__}" == "FEDORA" ]]; then
+	sudo dnf config-manager --add-repo "https://download.docker.com/linux/fedora/docker-ce.repo"
+	sudo dnf install docker-ce
+fi
+
 # Install nvm
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 # Reload shell, then install node
 source ${HOME}/.bashrc
-nvm install 9
+nvm install 10
 
 
 # Install pip
-curl -o- https://bootstrap.pypa.io/get-pip.py | sudo python
+pip --version 1>&2 && echo "Pip installed." || curl -o- https://bootstrap.pypa.io/get-pip.py | sudo python
 
 
 echo "Finished setup!"

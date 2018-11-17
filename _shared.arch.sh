@@ -10,9 +10,3 @@ function check_install_package {
 		sudo pacman -S "${PKG_NAME}"
 	fi
 }
-
-
-# Takes a screenshot and copies it to the clipboard.
-function screenshot_region_to_clipboard {
-	./screenshot.py --region
-}

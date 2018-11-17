@@ -11,9 +11,3 @@ function check_install_package {
 		echo "${PKG_NAME} is already installed."
 	fi
 }
-
-
-# Takes a screenshot and copies it to the clipboard.
-function screenshot_region_to_clipboard {
-	./screenshot.py --region
-}
