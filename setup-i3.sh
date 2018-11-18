@@ -11,9 +11,9 @@ function print_usage {
 }
 
 # Script to setup my personal environment.
-if [[ "${__DETECTED_SYSTEM}" == "DEBIAN" ]]; then
+if [[ "${__DETECTED_SYSTEM__}" == "DEBIAN" ]]; then
   PROGRAMS=("i3" "i3status" "dmenu" "i3lock" "xautolock" "thunar" "gnome-icon-theme" "nm-applet" "volumeicon" "ncdu" "redshift-gtk" "scrot" "xclip" "cpanminus")
-elif [[ "${__DETECTED_SYSTEM}" == "FEDORA" ]]; then
+elif [[ "${__DETECTED_SYSTEM__}" == "FEDORA" ]]; then
   PROGRAMS=("i3" "i3status" "dmenu" "i3lock" "xautolock" "network-manager-applet" "volumeicon" "ncdu" "redshift-gtk" "scrot" "xclip" "cpanminus" "deluge")
 fi
 
