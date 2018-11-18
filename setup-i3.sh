@@ -14,7 +14,7 @@ function print_usage {
 if [[ "${__DETECTED_SYSTEM}" == "DEBIAN" ]]; then
   PROGRAMS=("i3" "i3status" "dmenu" "i3lock" "xautolock" "thunar" "gnome-icon-theme" "nm-applet" "volumeicon" "ncdu" "redshift-gtk" "scrot" "xclip" "cpanminus")
 elif [[ "${__DETECTED_SYSTEM}" == "FEDORA" ]]; then
-  PROGRAMS=("i3" "i3status" "dmenu" "i3lock" "xautolock" "network-manager-applet" "volumeicon" "ncdu" "redshift-gtk" "scrot" "xclip" "cpanminus")
+  PROGRAMS=("i3" "i3status" "dmenu" "i3lock" "xautolock" "network-manager-applet" "volumeicon" "ncdu" "redshift-gtk" "scrot" "xclip" "cpanminus" "deluge")
 fi
 
 for PROGRAM in "${PROGRAMS[@]}"; do
