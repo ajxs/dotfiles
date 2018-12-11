@@ -21,5 +21,19 @@
 	"[typescript]": {
 		"editor.insertSpaces": false,
 		"files.trimTrailingWhitespace": true
-	}
+	},
+	"[c]": {
+		"editor.insertSpaces": false,
+		"files.trimTrailingWhitespace": true
+	},
+	"[rust]": {
+		"editor.renderWhitespace": "all",
+		"editor.tabSize": 4,
+		"editor.insertSpaces": true,
+		"files.trimTrailingWhitespace": true
+	},
+	"files.insertFinalNewline": true,
+	"workbench.startupEditor": "newUntitledFile",
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"javascript.updateImportsOnFileMove.enabled": "always"
 }

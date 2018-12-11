@@ -3,7 +3,6 @@
 use strict;
 use warnings;
 use Getopt::Long;
-use Date::Parse;
 
 # Creates a screenshot and saves it in the $HOME/Pictures directory.
 #  Automatically copies the filename to the clipboard.
@@ -28,7 +27,8 @@ GetOptions('quality=i' => \$quality,
 	'region' => \$region);
 
 
-my $timestamp = str2time(localtime(time));
+my $timestamp = localtime(time);
+$timestamp =~ s/\s/_/g;
 my $screenshot_filename = "$PICTURES_DIR/screenshot_$timestamp.jpg";
 
 my @screenshot_cmd = ($SCREENSHOT_UTILITY);
