@@ -16,10 +16,10 @@ if [[ "${__DETECTED_SYSTEM__}" != "ARCH" ]]; then
 fi
 
 
-if [[ "${__DETECTED_SYSTEM__}" == "FEDORA" ]]; then
-	sudo dnf config-manager --add-repo "https://download.docker.com/linux/fedora/docker-ce.repo"
-	sudo dnf install docker-ce
-fi
+# if [[ "${__DETECTED_SYSTEM__}" == "FEDORA" ]]; then
+# 	sudo dnf config-manager --add-repo "https://download.docker.com/linux/fedora/docker-ce.repo"
+# 	sudo dnf install docker-ce
+# fi
 
 # Install nvm
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
