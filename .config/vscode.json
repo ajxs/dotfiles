@@ -32,8 +32,18 @@
 		"editor.insertSpaces": true,
 		"files.trimTrailingWhitespace": true
 	},
+	"[sql]": {
+		"editor.insertSpaces": false
+	},
 	"files.insertFinalNewline": true,
 	"workbench.startupEditor": "newUntitledFile",
 	"typescript.updateImportsOnFileMove.enabled": "always",
-	"javascript.updateImportsOnFileMove.enabled": "always"
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"files.exclude": {
+		"**/.git": false,
+		"**/.svn": true,
+		"**/.hg": true,
+		"**/CVS": true,
+		"**/.DS_Store": true
+	}
 }
