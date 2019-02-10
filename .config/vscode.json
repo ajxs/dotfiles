@@ -32,6 +32,11 @@
 		"editor.insertSpaces": true,
 		"files.trimTrailingWhitespace": true
 	},
+	"[perl]": {
+		"editor.renderWhitespace": "all",
+		"editor.insertSpaces": false,
+		"files.trimTrailingWhitespace": true
+	},
 	"files.insertFinalNewline": true,
 	"workbench.startupEditor": "newUntitledFile",
 	"typescript.updateImportsOnFileMove.enabled": "always",

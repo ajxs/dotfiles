@@ -2,11 +2,11 @@
 
 # check if a package is installed, and install it if not.
 function check_install_package {
-	local PKG_NAME="${1}"
-	if dnf -q list installed "${PKG_NAME}" > /dev/null; then
-		echo "${PKG_NAME} is already installed."
+	local pkg_name="${1}"
+	if dnf -q list installed "${pkg_name}" > /dev/null; then
+		echo "${pkg_name} is already installed."
 	else
-		echo "Intalling ${PKG_NAME}."
-		sudo dnf -y install "${PKG_NAME}"
+		echo "Intalling ${pkg_name}."
+		sudo dnf -y install "${pkg_name}"
 	fi
 }
