@@ -71,5 +71,6 @@
 		"**/.hg": true,
 		"**/CVS": true,
 		"**/.DS_Store": true
-	}
+	},
+	"window.menuBarVisibility": "hidden"
 }
