@@ -9,41 +9,6 @@
 	],
 	"editor.minimap.enabled": false,
 	"window.zoomLevel": 0,
-	"[python]": {
-		"editor.detectIndentation": false,
-		"editor.renderWhitespace": "all",
-		"editor.tabSize": 4,
-		"editor.insertSpaces": true,
-		"files.trimTrailingWhitespace": true
-	},
-	"[javascript]": {
-		"editor.detectIndentation": true,
-		"files.trimTrailingWhitespace": true
-	},
-	"[typescript]": {
-		"editor.detectIndentation": true,
-		"editor.insertSpaces": false,
-		"files.trimTrailingWhitespace": true
-	},
-	"[c]": {
-		"editor.insertSpaces": false,
-		"editor.rulers": [
-			80
-		],
-		"files.trimTrailingWhitespace": true
-	},
-	"[rust]": {
-		"editor.detectIndentation": false,
-		"editor.renderWhitespace": "all",
-		"editor.tabSize": 4,
-		"editor.insertSpaces": true,
-		"files.trimTrailingWhitespace": true
-	},
-	"[perl]": {
-		"editor.renderWhitespace": "all",
-		"editor.insertSpaces": false,
-		"files.trimTrailingWhitespace": true
-	},
 	"[ada]": {
 		"editor.detectIndentation": false,
 		"editor.renderWhitespace": "all",
@@ -54,6 +19,44 @@
 		],
 		"files.trimTrailingWhitespace": true,
 	},
+	"[c]": {
+		"editor.insertSpaces": false,
+		"editor.rulers": [
+			80
+		],
+		"files.trimTrailingWhitespace": true
+	},
+	"[javascript]": {
+		"editor.detectIndentation": true,
+		"files.trimTrailingWhitespace": true
+	},
+	"[perl]": {
+		"editor.renderWhitespace": "all",
+		"editor.insertSpaces": false,
+		"files.trimTrailingWhitespace": true
+	},
+	"[python]": {
+		"editor.detectIndentation": false,
+		"editor.renderWhitespace": "all",
+		"editor.tabSize": 4,
+		"editor.insertSpaces": true,
+		"files.trimTrailingWhitespace": true
+	},
+	"[rust]": {
+		"editor.detectIndentation": false,
+		"editor.renderWhitespace": "all",
+		"editor.tabSize": 4,
+		"editor.insertSpaces": true,
+		"files.trimTrailingWhitespace": true
+	},
+	"[sql]": {
+		"editor.insertSpaces": false
+	},
+	"[typescript]": {
+		"editor.detectIndentation": true,
+		"editor.insertSpaces": false,
+		"files.trimTrailingWhitespace": true
+	},
 	"files.insertFinalNewline": true,
 	"workbench.startupEditor": "newUntitledFile",
 	"typescript.updateImportsOnFileMove.enabled": "always",
@@ -61,5 +64,12 @@
 	"C_Cpp.default.cStandard": "c99",
 	"C_Cpp.default.intelliSenseMode": "gcc-x64",
 	"java.configuration.checkProjectSettingsExclusions": false,
-	"workbench.activityBar.visible": false
+	"workbench.activityBar.visible": false,
+	"files.exclude": {
+		"**/.git": false,
+		"**/.svn": true,
+		"**/.hg": true,
+		"**/CVS": true,
+		"**/.DS_Store": true
+	}
 }
