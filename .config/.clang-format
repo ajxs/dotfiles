@@ -1,0 +1,25 @@
+---
+Language: Cpp
+AllowShortBlocksOnASingleLine: false
+AllowShortFunctionsOnASingleLine: false
+AllowShortLoopsOnASingleLine: true
+AllowShortIfStatementsOnASingleLine: true
+AlignTrailingComments: true
+AlignAfterOpenBracket: Align
+BreakBeforeBraces: Attach
+ColumnLimit: 100
+IndentWidth: 2
+IndentPPDirectives: None
+MaxEmptyLinesToKeep: 2
+PointerAlignment: Right
+ReflowComments: true
+SortIncludes: true
+SpaceBeforeAssignmentOperators: true
+SpaceAfterCStyleCast: false
+SpaceBeforeParens: false
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 4
+SpacesInSquareBrackets: false
+SpacesInParentheses: false
+TabWidth: 2
+UseTab: ForIndentation
