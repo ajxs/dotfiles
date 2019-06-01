@@ -1,5 +1,5 @@
 {
-	"editor.fontSize": 12,
+	"editor.fontSize": 10,
 	"editor.renderWhitespace": "all",
 	"editor.tabSize": 2,
 	"editor.insertSpaces": false,
@@ -35,5 +35,7 @@
 	"files.insertFinalNewline": true,
 	"workbench.startupEditor": "newUntitledFile",
 	"typescript.updateImportsOnFileMove.enabled": "always",
-	"javascript.updateImportsOnFileMove.enabled": "always"
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"workbench.activityBar.visible": false,
+	"editor.lineHeight": 12
 }
