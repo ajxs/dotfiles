@@ -1,5 +1,6 @@
 {
-	"editor.fontSize": 10,
+	"editor.fontSize": 12,
+	"editor.lineHeight": 14,
 	"editor.renderWhitespace": "all",
 	"editor.tabSize": 2,
 	"editor.insertSpaces": false,
