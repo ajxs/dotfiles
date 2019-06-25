@@ -7,48 +7,45 @@ function check_install_package {
 }
 
 
-function die_with_message {
-	echo "$1" >&2
-	exit 1
-}
-
-
 function append_to_bashrc() {
-	local TEXT="$1"
-	local BASHRC="${HOME}/.bashrc"
+	local text="$1"
+	local bashrc="${HOME}/.bashrc"
 
-	printf "%s\\n" "${TEXT}" >> "${BASHRC}"
+	printf "%s\\n" "${text}" >> "${bashrc}"
 }
 
 
 function append_to_PATH() {
-	local DIR="$1"
-	local PATH_STRING='PATH=$PATH:'
+	local dir="$1"
+	local path_prefix='PATH=$PATH:'
 
-	append_to_bashrc "${PATH_STRING}${DIR}"
+	append_to_bashrc "${path_prefix}${dir}"
 }
 
 
-# Global var for referencing in subsequent scripts to check the OS.
-__DETECTED_SYSTEM__=""
-
-
 # Apply OS-specific overloads
+current_dir="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)"
 if [ -f "/etc/arch-release" ]; then
-	source ./_shared.arch.sh
-	__DETECTED_SYSTEM__="ARCH"
+	source "${current_dir}/_shared.arch.sh"
+	detected_system="ARCH"
 elif [ -f "/etc/lsb-release" ]; then
-	source ./_shared.deb.sh
-	__DETECTED_SYSTEM__="DEBIAN"
+	source "${current_dir}/_shared.deb.sh"
+	detected_system="DEBIAN"
 elif [ -f "/etc/redhat-release" ]; then
-	source ./_shared.fedora.sh
-	__DETECTED_SYSTEM__="FEDORA"
+	source "${current_dir}/_shared.fedora.sh"
+	detected_system="FEDORA"
 elif [ "$(uname)" = "Darwin" ]; then
-	source ./_shared.osx.sh
-	__DETECTED_SYSTEM__="OSX"
+	source "${current_dir}/_shared.osx.sh"
+	detected_system="OSX"
 else
-	die_with_message "Unable to determine Operating System! Exiting."
+	(>&2 echo "Unable to determine Operating System! Not applying any OS specific overrides.")
 fi
+
+
+function die_with_message {
+	echo "$1" >&2
+	exit 1
+}
 
 
 function prompt_to_confirm {
@@ -62,25 +59,25 @@ function prompt_to_confirm {
 
 # Check if a file has been downloaded to the user's download directory, otherwise download it.
 function check_for_local_download {
-	local FILE_URL="${1}"
-	if [ -z "${FILE_URL}" ]; then
+	local file_url="${1}"
+	if [ -z "${file_url}" ]; then
 		echo "No URL passed to check_for_local_download()! Exiting." >&2
 		exit 1
 	fi
 
-	local FILE_NAME="${FILE_URL##*/}"
-	local DOWNLOAD_DIR="${HOME}/Downloads"
-	local LOCAL_DOWNLOADED_COPY="${DOWNLOAD_DIR}/${FILE_NAME}"
+	local file_name="${file_url##*/}"
+	local download_dir="${HOME}/Downloads"
+	local local_downloaded_copy="${download_dir}/${file_name}"
 
 	# check if we have a local downloaded copy already
-	if [ -e ${LOCAL_DOWNLOADED_COPY} ]; then
-		echo "Using local copy found at ${LOCAL_DOWNLOADED_COPY}." >&2
-		echo ${LOCAL_DOWNLOADED_COPY}
+	if [ -e ${local_downloaded_copy} ]; then
+		echo "Using local copy found at ${local_downloaded_copy}." >&2
+		echo ${local_downloaded_copy}
 	else
-		local TEMP_DIR="$(mktemp -d)"
-		echo "No local copy found. Downloading from ${FILE_URL}..." >&2
-		wget -q "${FILE_URL}" -P "${TEMP_DIR}" || die_with_message "Failure downloading ${FILE_URL}! Exiting."
-		echo ${TEMP_DIR}/${FILE_NAME}
+		local tmp_dir="$(mktemp -d)"
+		echo "No local copy found. Downloading from ${file_url}..." >&2
+		wget -q "${file_url}" -P "${tmp_dir}" || die_with_message "Failure downloading ${file_url}! Exiting."
+		echo ${tmp_dir}/${file_name}
 	fi
 }
 
