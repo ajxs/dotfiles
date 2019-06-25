@@ -2,6 +2,6 @@
 
 foreach my $line (<STDIN>) {
 	chomp $line;
-	$line =~ s/([A-Z])+/'_'.lc($1)/ge;
+	$line =~ s/([A-Z])/'_'.lc($1)/ge;
 	print "$line\n";
 }
