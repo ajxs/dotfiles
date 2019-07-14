@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 source ./_shared.sh
 
@@ -47,7 +47,13 @@ for PROGRAM in "${PROGRAMS[@]}"; do
 	check_install_package "${PROGRAM}"
 done
 
-# set up git identity
+# Create symlink to the saved gitconfig.
+config_dest="${HOME}/.gitconfig"
+if [[ ! -f "${config_dest}" ]]; then 
+  sudo ln -s "./.config/.gitconfig" ${config_dest}
+fi
+
+# Set up git identity
 git config --global user.email "${GIT_EMAIL}"
 git config --global user.name "Anthony"
 

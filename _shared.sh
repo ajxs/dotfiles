@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Place overloaded functions at the start of this file.
 # These are files that will be overloaded by the OS specific script files.
 
