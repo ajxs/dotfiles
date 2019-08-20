@@ -5,16 +5,17 @@ source "${HOME}/dotfiles/_shared.sh" || exit 1
 # Recipe for installing a GNAT capable GCC cross-compiler.
 
 export BUILD_TARGET="i686-elf"
-export BUILD_PREFIX="${HOME}/opt/cross/again"
+export BUILD_PREFIX="${HOME}/opt/cross"
 export PATH="${BUILD_PREFIX}/bin:${PATH}"
+export HOST="x86_64-pc-linux-gnu"
 
 build_dir="${HOME}/src/build"
 source_dir="${HOME}/src"
 
-
 export BINUTILS_VERSION="2.32"
-export GCC_VERSION="8.3.0"
+export GCC_VERSION="6.3.0"
 export NEWLIB_VERSION="3.1.0"
+
 
 function build_binutils {
 	binutils_dir="binutils-${BINUTILS_VERSION}"
@@ -34,8 +35,14 @@ function build_binutils {
 	../../${binutils_dir}/configure \
 		--target=${BUILD_TARGET} \
 		--prefix="${BUILD_PREFIX}" \
+		--host="${HOST}" \
+		--with-gcc \
 		--with-sysroot \
 		--disable-nls \
+		--enable-multilib \
+		--enable-interwork \
+		--disable-shared \
+		--disable-threads \
 		--disable-werror
 
 	make -j8 || die_with_message "Error building binutils"
@@ -63,9 +70,11 @@ function build_initial_gcc {
 	${source_dir}/${gcc_dir}/configure \
 		--target=${BUILD_TARGET} \
 		--prefix="${BUILD_PREFIX}" \
+		--host="${HOST}" \
 		--enable-languages="c" \
 		--with-newlib \
 		--without-headers \
+		--enable-multilib \
 		--disable-shared \
 		--disable-nls
 
@@ -94,6 +103,7 @@ function build_newlib {
 	${source_dir}/${newlib_dir}/configure \
 		--target=${BUILD_TARGET} \
 		--prefix="${BUILD_PREFIX}" \
+		--disable-multilib \
 		--disable-nls
 
 	make -j8 all || die_with_message "Error building newlib"
@@ -121,26 +131,33 @@ function build_gcc {
 	${source_dir}/${gcc_dir}/configure \
 		--target=${BUILD_TARGET} \
 		--prefix="${BUILD_PREFIX}" \
+		--host="${HOST}" \
 		--enable-languages="c,c++,ada" \
 		--with-newlib \
 		--disable-libada \
 		--without-headers \
+		--disable-threads \
+		--enable-multilib \
+		--enable-interwork \
 		--disable-shared \
+		--with-system-zlib \
+		--without-libiconv-prefix \
+		--disable-libmudflap \
+		--disable-libstdcxx-pch \
+		--enable-lto \
 		--disable-nls
 
-	make -j8 || die_with_message "Error building GCC"
+	make -j8 all-gcc || die_with_message "Error building GCC"
+	make -j6 all-target-libgcc || die_with_message "Error building GCC"
 	make -j8 -C gcc cross-gnattools ada.all.cross || die_with_message "Error building GCC"
 
-	make -j8 install || die_with_message "Error building GCC"
-
-	make -j8 all-target-libgcc || die_with_message "Error building GCC"
-	make -j8 install-target-libgcc || die_with_message "Error installing GCC"
+	make -j8 install-strip-gcc install-target-libgcc || die_with_message "Error installing GCC"
 
 	cd "${build_dir}"
 }
 
 
-build_binutils
-build_initial_gcc
+# build_binutils
+# build_initial_gcc
 build_newlib
-build_gcc
+# build_gcc
