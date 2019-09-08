@@ -4,7 +4,13 @@ source "${HOME}/dotfiles/_shared.sh" || exit 1
 
 # Recipe for installing a GNAT capable GCC cross-compiler.
 # Requires a compatible version of GNAT on the host machine for bootstrapping the 
-# installation process.
+# installation process. This is the source of much trouble and confusion. I have only been
+# able to build with certain combinations. Usually a matching system version of FSF GNAT
+# is required. e.g System FSF GNAT 8.3.0 will need to be installed to build GCC/GNAT 8.3.0.
+# Assumes that the source files for GCC, newlib, binutils, and optionally GMP, MPC, MPFR
+# are stored under the directory pointed at by the `source_dir` variable below.
+# The 'build' directory used for building these is configurable below.
+
 
 # The target triplet for the build.
 export BUILD_TARGET="i686-elf"
@@ -16,8 +22,14 @@ export HOST="x86_64-pc-linux-gnu"
 # Update the PATH variable for this script so it includes the build directory.
 export PATH="${BUILD_PREFIX}/bin:${PATH}"
 
+# Whether we want to link statically against the local installation of GMP, MPC, MPFR.
+# Disabling this has not been extensively tested.
+use_local_deps=1
+# The search dir when looking for these local dependency libraries.
+local_lib_dir="/usr/local"
 
-# The concurrency to use for make.
+
+# The concurrency to use during the build process.
 concurrency=8
 
 # The directory where the source dirs are located.
@@ -95,9 +107,9 @@ function build_bootstrap_gcc {
 		--prefix="${BUILD_PREFIX}"          \
 		--enable-languages="c"              \
 		--with-newlib                       \
-		--with-gmp=/usr/local               \
-		--with-mpc=/usr/local               \
-		--with-mpfr=/usr/local              \
+		--with-gmp=${local_lib_dir}         \
+		--with-mpc=${local_lib_dir}         \
+		--with-mpfr=${local_lib_dir}        \
 		--without-headers                   \
 		--enable-multilib                   \
 		--disable-shared                    \
@@ -131,9 +143,9 @@ function build_gcc {
 		--prefix="${BUILD_PREFIX}"          \
 		--enable-languages="c,c++,ada"      \
 		--with-newlib                       \
-		--with-gmp=/usr/local               \
-		--with-mpc=/usr/local               \
-		--with-mpfr=/usr/local              \
+		--with-gmp=${local_lib_dir}         \
+		--with-mpc=${local_lib_dir}         \
+		--with-mpfr=${local_lib_dir}        \
 		--disable-libada                    \
 		--without-headers                   \
 		--disable-threads                   \
@@ -273,9 +285,24 @@ echo "▒                                                   ▒"
 echo "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
 echo ""
 
-# build_gmp
-# build_mpc
-# build_mpfr
+echo "Checking installed pre-requisites"
+check_install_package "gnat-8" || die_with_message "GNAT installation not found! Exiting"
+
+if [[ -n "${use_local_deps}" ]]; then
+	echo "Linking statically against locally installed GMP, MPC, MPFR."
+
+	check_install_package "libgmp-dev" || die_with_message "GMP installation not found! Exiting"
+	check_install_package "libmpc-dev" || die_with_message "MPC installation not found! Exiting"
+	check_install_package "libmpfr-dev" || die_with_message "MPFR installation not found! Exiting"
+else
+	echo "Installing GMP, MPC, MPFR."
+
+	build_gmp
+	build_mpc
+	build_mpfr
+fi
+
+
 build_binutils
 build_bootstrap_gcc
 build_newlib
