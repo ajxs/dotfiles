@@ -45,7 +45,9 @@ gmp_version="6.1.2"
 mpc_version="1.1.0"
 mpfr_version="4.0.2"
 
-prompt=
+# Whether we want to prompt the user to proceed through each step of the build process.
+# If this var is blank, the user will not be prompted.
+prompt_user=false
 
 # Builds and installs binutils.
 function build_binutils {
@@ -57,7 +59,10 @@ function build_binutils {
 	echo "Target: ${BUILD_TARGET}"
 	echo "Prefix: ${BUILD_PREFIX}"
 	echo "Source dir: ${source_dir}/${binutils_dir}"
-	[[ -n ${prompt} ]] && prompt_to_confirm
+
+	if ${prompt_user}; then
+		prompt_to_confirm
+	fi
 
 	if [[ ! -d "${build_dir}/${binutils_dir}" ]]; then
 		mkdir "${build_dir}/${binutils_dir}" || die_with_message "Error creating build dir! Exiting"
@@ -95,7 +100,10 @@ function build_bootstrap_gcc {
 	echo "Target: ${BUILD_TARGET}"
 	echo "Prefix: ${BUILD_PREFIX}"
 	echo "Source dir: ${source_dir}/${gcc_dir}"
-	[[ -n ${prompt} ]] && prompt_to_confirm
+
+	if ${prompt_user}; then
+		prompt_to_confirm
+	fi
 
 	if [[ ! -d "${build_dir}/${gcc_dir}" ]]; then
 		mkdir "${build_dir}/${gcc_dir}" || die_with_message "Error creating build dir! Exiting"
@@ -132,7 +140,10 @@ function build_gcc {
 	echo "Target: ${BUILD_TARGET}"
 	echo "Prefix: ${BUILD_PREFIX}"
 	echo "Source dir: ${source_dir}/${gcc_dir}"
-	[[ -n ${prompt} ]] && prompt_to_confirm
+
+	if ${prompt_user}; then
+		prompt_to_confirm
+	fi
 
 	if [[ ! -d "${build_dir}/${gcc_dir}" ]]; then
 		mkdir "${build_dir}/${gcc_dir}" || die_with_message "Error creating build dir! Exiting"
@@ -179,7 +190,10 @@ function build_gmp {
 	echo "Target: ${BUILD_TARGET}"
 	echo "Prefix: ${BUILD_PREFIX}"
 	echo "Source dir: ${source_dir}/${gmp_dir}"
-	[[ -n ${prompt} ]] && prompt_to_confirm
+
+	if ${prompt_user}; then
+		prompt_to_confirm
+	fi
 
 	if [[ ! -d "${build_dir}/${gmp_dir}" ]]; then
 		mkdir "${build_dir}/${gmp_dir}" || die_with_message "Error creating build dir! Exiting"
@@ -207,7 +221,10 @@ function build_mpc {
 	echo "Target: ${BUILD_TARGET}"
 	echo "Prefix: ${BUILD_PREFIX}"
 	echo "Source dir: ${source_dir}/${mpc_dir}"
-	[[ -n ${prompt} ]] && prompt_to_confirm
+
+	if ${prompt_user}; then
+		prompt_to_confirm
+	fi
 
 	if [[ ! -d "${build_dir}/${mpc_dir}" ]]; then
 		mkdir "${build_dir}/${mpc_dir}" || die_with_message "Error creating build dir! Exiting"
@@ -234,7 +251,10 @@ function build_mpfr {
 	echo "Target: ${BUILD_TARGET}"
 	echo "Prefix: ${BUILD_PREFIX}"
 	echo "Source dir: ${source_dir}/${mpfr_dir}"
-	[[ -n ${prompt} ]] && prompt_to_confirm
+
+	if ${prompt_user}; then
+		prompt_to_confirm
+	fi
 
 	if [[ ! -d "${build_dir}/${mpfr_dir}" ]]; then
 		mkdir "${build_dir}/${mpfr_dir}" || die_with_message "Error creating build dir! Exiting"
@@ -261,7 +281,10 @@ function build_newlib {
 	echo "Target: ${BUILD_TARGET}"
 	echo "Prefix: ${BUILD_PREFIX}"
 	echo "Source dir: ${source_dir}/${newlib_dir}"
-	[[ -n ${prompt} ]] && prompt_to_confirm
+
+	if ${prompt_user}; then
+		prompt_to_confirm
+	fi
 
 	if [[ ! -d "${build_dir}/${newlib_dir}" ]]; then
 		mkdir "${build_dir}/${newlib_dir}" || die_with_message "Error creating build dir! Exiting"
