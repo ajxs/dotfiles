@@ -15,7 +15,7 @@ source "${HOME}/dotfiles/_shared.sh" || exit 1
 # The target triplet for the build.
 export BUILD_TARGET="i686-elf"
 # The install prefix.
-export BUILD_PREFIX="${HOME}/opt/cross"
+export BUILD_PREFIX="${HOME}/opt/cross/${BUILD_TARGET}"
 # The host target triplet.
 export HOST="x86_64-pc-linux-gnu"
 
@@ -113,6 +113,7 @@ function build_bootstrap_gcc {
 		--without-headers                   \
 		--enable-multilib                   \
 		--disable-shared                    \
+		--with-system-zlib                  \
 		--disable-nls || exit 1
 
 	make -j${concurrency} all-gcc || die_with_message "Error building initial GCC"
@@ -157,6 +158,7 @@ function build_gcc {
 		--disable-libmudflap                \
 		--disable-libstdcxx-pch             \
 		--enable-lto                        \
+		--with-system-zlib                  \
 		--disable-nls || exit 1
 
 	make -j${concurrency} all-gcc || die_with_message "Error building GCC"
@@ -287,6 +289,7 @@ echo ""
 
 echo "Checking installed pre-requisites"
 check_install_package "gnat-8" || die_with_message "GNAT installation not found! Exiting"
+check_install_package "zlib1g-dev" || die_with_message "zlib installation not found! Exiting"
 
 if [[ ! -d "${build_dir}" ]]; then
 	echo "Creating build dir"
@@ -312,3 +315,5 @@ build_binutils
 build_bootstrap_gcc
 build_newlib
 build_gcc
+
+echo "Finished building cross-GNAT"
