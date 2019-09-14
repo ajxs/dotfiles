@@ -51,7 +51,7 @@ prompt=
 function build_binutils {
 	binutils_dir="binutils-${binutils_version}"
 
-	cd "${build_dir}"
+	cd "${build_dir}" || exit 1
 
 	echo "Building cross binutils for arch: '${BUILD_TARGET}'"
 	echo "Target: ${BUILD_TARGET}"
@@ -89,7 +89,7 @@ function build_binutils {
 function build_bootstrap_gcc {
 	gcc_dir="gcc-${gcc_version}"
 
-	cd "${build_dir}"
+	cd "${build_dir}" || exit 1
 
 	echo "Building cross GCC bootstrap for arch: '${BUILD_TARGET}'"
 	echo "Target: ${BUILD_TARGET}"
@@ -126,7 +126,7 @@ function build_bootstrap_gcc {
 function build_gcc {
 	gcc_dir="gcc-${gcc_version}"
 
-	cd "${build_dir}"
+	cd "${build_dir}" || exit 1
 
 	echo "Building GCC for arch: '${BUILD_TARGET}'"
 	echo "Target: ${BUILD_TARGET}"
@@ -173,7 +173,7 @@ function build_gcc {
 function build_gmp {
 	gmp_dir="gmp-${gmp_version}"
 
-	cd "${build_dir}"
+	cd "${build_dir}" || exit 1
 
 	echo "Building gmp for arch: '${BUILD_TARGET}'"
 	echo "Target: ${BUILD_TARGET}"
@@ -201,7 +201,7 @@ function build_gmp {
 function build_mpc {
 	mpc_dir="mpc-${mpc_version}"
 
-	cd "${build_dir}"
+	cd "${build_dir}" || exit 1
 
 	echo "Building mpc for arch: '${BUILD_TARGET}'"
 	echo "Target: ${BUILD_TARGET}"
@@ -228,7 +228,7 @@ function build_mpc {
 function build_mpfr {
 	mpfr_dir="mpfr-${mpfr_version}"
 
-	cd "${build_dir}"
+	cd "${build_dir}" || exit 1
 
 	echo "Building mpfr for arch: '${BUILD_TARGET}'"
 	echo "Target: ${BUILD_TARGET}"
@@ -255,7 +255,7 @@ function build_mpfr {
 function build_newlib {
 	newlib_dir="newlib-${newlib_version}"
 
-	cd "${build_dir}"
+	cd "${build_dir}" || exit 1
 
 	echo "Building cross newlib for arch: '${BUILD_TARGET}'"
 	echo "Target: ${BUILD_TARGET}"
@@ -291,6 +291,11 @@ echo ""
 echo "Checking installed pre-requisites"
 check_install_package "gnat-8" || die_with_message "GNAT installation not found! Exiting"
 check_install_package "zlib1g-dev" || die_with_message "zlib installation not found! Exiting"
+
+if [[ ! -d "${build_dir}" ]]; then
+	echo "Creating build dir"
+	mkdir -p "${build_dir}" || die_with_message "Error creating build dir! Exiting"
+fi
 
 if [[ -n "${use_local_deps}" ]]; then
 	echo "Linking statically against locally installed GMP, MPC, MPFR."
