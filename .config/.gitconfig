@@ -1,0 +1,16 @@
+[alias]
+	cam = commit -am
+	cm = commit -m
+	st = status
+	aa = add -A
+	uc = reset HEAD~
+[color]
+	ui = always
+	status = always
+	branch = always
+	diff = always
+	interactive = always
+[core]
+	editor = vim
+[push]
+	default = simple

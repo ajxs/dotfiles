@@ -1,0 +1,16 @@
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.perl-ext-common: tabbed
+
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+
+URxvt*boldFont:
+Xft*hinting: full
+URxvt*fading: 0
+URxvt*tintColor: #ffffff
+URxvt*shading: 0
+URxvt*inheritPixmap: False
+
+URxvt*background: #040404
+URxvt*foreground: #cccccc
