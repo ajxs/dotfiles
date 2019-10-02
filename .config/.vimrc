@@ -12,6 +12,7 @@ Plug 'Quramy/tsuquyomi'
 Plug 'Raimondi/delimitMate'
 Plug 'leafgarland/typescript-vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/nerdtree'
 
 " Colorschemes
 Plug 'jnurmine/Zenburn'
@@ -44,3 +45,6 @@ set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:�
 
 " Remove trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
+
+" NERDTree
+map <C-n> :NERDTreeToggle<CR>
