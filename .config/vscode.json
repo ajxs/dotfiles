@@ -73,5 +73,6 @@
 		"**/CVS": true,
 		"**/.DS_Store": true
 	},
-	"window.menuBarVisibility": "hidden"
+	"window.menuBarVisibility": "hidden",
+	"workbench.editor.highlightModifiedTabs": true
 }
