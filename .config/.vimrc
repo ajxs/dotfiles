@@ -32,7 +32,7 @@ set autoindent
 set laststatus=2
 
 " Configure colorscheme.
-colorscheme duo-mini
+colorscheme seoul256
 
 " Configure syntax.
 syntax enable
