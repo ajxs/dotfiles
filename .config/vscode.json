@@ -1,15 +1,4 @@
 {
-	"editor.fontSize": 12,
-	"editor.lineHeight": 14,
-	"editor.renderWhitespace": "all",
-	"editor.tabSize": 2,
-	"editor.insertSpaces": false,
-	"search.location": "panel",
-	"editor.rulers": [
-		90
-	],
-	"editor.minimap.enabled": false,
-	"window.zoomLevel": 0,
 	"[ada]": {
 		"editor.detectIndentation": false,
 		"editor.renderWhitespace": "all",
@@ -18,7 +7,7 @@
 		"editor.rulers": [
 			72
 		],
-		"files.trimTrailingWhitespace": true,
+		"files.trimTrailingWhitespace": true
 	},
 	"[c]": {
 		"editor.insertSpaces": false,
@@ -58,14 +47,22 @@
 		"editor.insertSpaces": false,
 		"files.trimTrailingWhitespace": true
 	},
-	"files.insertFinalNewline": true,
-	"workbench.startupEditor": "newUntitledFile",
-	"typescript.updateImportsOnFileMove.enabled": "always",
-	"javascript.updateImportsOnFileMove.enabled": "always",
 	"C_Cpp.default.cStandard": "c99",
 	"C_Cpp.default.intelliSenseMode": "gcc-x64",
+	"javascript.updateImportsOnFileMove.enabled": "always",
 	"java.configuration.checkProjectSettingsExclusions": false,
-	"workbench.activityBar.visible": false,
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"editor.fontSize": 12,
+	"editor.insertSpaces": false,
+	"editor.minimap.enabled": false,
+	"editor.lineHeight": 14,
+	"search.location": "panel",
+	"editor.renderWhitespace": "all",
+	"editor.rulers": [
+		90
+	],
+	"editor.tabSize": 2,
+	"files.insertFinalNewline": true,
 	"files.exclude": {
 		"**/.git": false,
 		"**/.svn": true,
@@ -73,5 +70,9 @@
 		"**/CVS": true,
 		"**/.DS_Store": true
 	},
-	"window.menuBarVisibility": "hidden"
+	"window.menuBarVisibility": "hidden",
+	"window.zoomLevel": 0,
+	"workbench.activityBar.visible": false,
+	"workbench.editor.highlightModifiedTabs": true,
+	"workbench.startupEditor": "newUntitledFile"
 }
