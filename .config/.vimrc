@@ -1,8 +1,8 @@
 " Install vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
-	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/bundle')
@@ -25,12 +25,9 @@ call plug#end()
 " Set up line number display.
 set nu
 
-" Set up indentation.
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
 set autoindent
 set laststatus=2
+set tabstop=2
 
 " Configure colorscheme.
 colorscheme seoul256
@@ -48,3 +45,8 @@ autocmd BufWritePre * %s/\s\+$//e
 
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
+
+augroup ProjectSetup
+au BufRead,BufEnter /home/$USER/cxos/*.S set et shiftwidth=2 ts=2
+augroup END
