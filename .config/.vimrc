@@ -47,7 +47,7 @@ syntax on
 
 " Configure colorscheme.
 set colorcolumn=100
-set termguicolors
+" set termguicolors
 set list
 set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
 colorscheme seoul256
@@ -64,3 +64,5 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 augroup ProjectSetup
 au BufRead,BufEnter /home/$USER/cxos/*.S set et shiftwidth=2 ts=2
 augroup END
+
+:nnoremap <F5> :buffers<CR>:buffer<Space>

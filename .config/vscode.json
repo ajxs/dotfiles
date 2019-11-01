@@ -74,5 +74,8 @@
 	"window.zoomLevel": 0,
 	"workbench.activityBar.visible": false,
 	"workbench.editor.highlightModifiedTabs": true,
-	"workbench.startupEditor": "newUntitledFile"
+	"workbench.startupEditor": "newUntitledFile",
+	"files.associations": {
+		"*.S": "gas"
+	}
 }
