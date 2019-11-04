@@ -8,26 +8,27 @@ endif
 call plug#begin('~/.vim/bundle')
 
 " General plugins.
-Plug 'Quramy/tsuquyomi'
+" Plug 'Quramy/tsuquyomi'
+" Plug 'leafgarland/typescript-vim'
 Plug 'Raimondi/delimitMate'
-Plug 'leafgarland/typescript-vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'junegunn/limelight.vim'
 
 " Colorschemes
 Plug 'jnurmine/Zenburn'
 Plug 'seesleestak/duo-mini'
 Plug 'davidosomething/vim-colors-meh'
 Plug 'junegunn/seoul256.vim'
-" Plug 'dracula/vim', { 'as': 'dracula' }
-" Plug 'sonph/onehalf', {'rtp': 'vim/'}
-" Plug 'gosukiwi/vim-atom-dark'
-" Plug 'jnurmine/Zenburn'
-" Plug 'sansbrina/vim-garbage-oracle'
-" Plug 'neutaaaaan/monosvkem'
-" Plug 'sts10/vim-pink-moon'
-" Plug 'vim-scripts/oceanlight'
-" Plug 'phanviet/sidonia'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'sansbrina/vim-garbage-oracle', { 'branch': 'release' }
+Plug 'sainnhe/vim-color-forest-night'
+Plug 'KKPMW/sacredforest-vim'
+Plug 'sts10/vim-pink-moon'
+Plug 'tomasiser/vim-code-dark'
+
 
 call plug#end()
 
@@ -41,13 +42,22 @@ set tabstop=2
 set showmatch
 set cmdheight=1
 
+" GUI config.
+set guifont=Inconsolata
+
 " Configure syntax.
 syntax enable
 syntax on
 
+" Limelight
+let g:limelight_paragraph_span = 3
+autocmd VimEnter * Limelight
+
+" Airline
+let g:airline#extensions#tabline#enabled = 1
+
 " Configure colorscheme.
-set colorcolumn=100
-" set termguicolors
+set colorcolumn=90
 set list
 set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
 colorscheme seoul256
@@ -65,4 +75,9 @@ augroup ProjectSetup
 au BufRead,BufEnter /home/$USER/cxos/*.S set et shiftwidth=2 ts=2
 augroup END
 
-:nnoremap <F5> :buffers<CR>:buffer<Space>
+nnoremap <F5> :buffers<CR>:buffer<Space>
+noremap <F6> :set list!<CR>
+inoremap <F6> <C-o>:set list!<CR>
+cnoremap <F6> <C-c>:set list!<CR>
+nmap <C-PageDown> :bprev<CR>
+nmap <C-PageUp> :bnext<CR>
