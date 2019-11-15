@@ -44,6 +44,8 @@ set cmdheight=1
 
 " GUI config.
 set guifont=Inconsolata
+set tb=
+set linespace=-1
 
 " Configure syntax.
 syntax enable
@@ -79,5 +81,5 @@ nnoremap <F5> :buffers<CR>:buffer<Space>
 noremap <F6> :set list!<CR>
 inoremap <F6> <C-o>:set list!<CR>
 cnoremap <F6> <C-c>:set list!<CR>
-nmap <C-PageDown> :bprev<CR>
-nmap <C-PageUp> :bnext<CR>
+nmap <C-H> :bprev<CR>
+nmap <C-L> :bnext<CR>
