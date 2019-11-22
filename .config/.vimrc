@@ -36,6 +36,7 @@ call plug#end()
 set nu
 set relativenumber
 
+filetype plugin indent on
 set autoindent
 set laststatus=2
 set tabstop=2
@@ -74,12 +75,16 @@ let NERDTreeShowHidden=1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 augroup ProjectSetup
-au BufRead,BufEnter /home/$USER/cxos/*.S set et shiftwidth=2 ts=2
+au BufRead,BufEnter /home/$USER/cxos/*.S set noet shiftwidth=2 ts=2
 augroup END
 
-nnoremap <F5> :buffers<CR>:buffer<Space>
-noremap <F6> :set list!<CR>
-inoremap <F6> <C-o>:set list!<CR>
-cnoremap <F6> <C-c>:set list!<CR>
-nmap <C-H> :bprev<CR>
-nmap <C-L> :bnext<CR>
+nnoremap <F5>    :buffers<CR>:buffer<Space>
+noremap  <F6>    :set list!<CR>
+inoremap <F6>    <C-o>:set list!<CR>
+cnoremap <F6>    <C-c>:set list!<CR>
+nmap     <C-H>   :bprev<CR>
+nmap     <C-L>   :bnext<CR>
+"nnoremap <left>  <nop>
+"nnoremap <right> <nop>
+"nnoremap <up>    <nop>
+"nnoremap <down>  <nop>
