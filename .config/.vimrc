@@ -8,14 +8,16 @@ endif
 call plug#begin('~/.vim/bundle')
 
 " General plugins.
-" Plug 'Quramy/tsuquyomi'
-" Plug 'leafgarland/typescript-vim'
 Plug 'Raimondi/delimitMate'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'vim-airline/vim-airline'
+"Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/limelight.vim'
+Plug 'ap/vim-buftabline'
+Plug 'schickling/vim-bufonly'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Colorschemes
 Plug 'jnurmine/Zenburn'
@@ -28,6 +30,7 @@ Plug 'sainnhe/vim-color-forest-night'
 Plug 'KKPMW/sacredforest-vim'
 Plug 'sts10/vim-pink-moon'
 Plug 'tomasiser/vim-code-dark'
+Plug 'romainl/Apprentice'
 
 
 call plug#end()
@@ -57,13 +60,17 @@ let g:limelight_paragraph_span = 3
 autocmd VimEnter * Limelight
 
 " Airline
-let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
+
+set noshowmode
+set laststatus=2
 
 " Configure colorscheme.
 set colorcolumn=90
 set list
 set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
-colorscheme seoul256
+" colorscheme seoul256
+colorscheme apprentice
 
 " Remove trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
@@ -78,13 +85,16 @@ augroup ProjectSetup
 au BufRead,BufEnter /home/$USER/cxos/*.S set noet shiftwidth=2 ts=2
 augroup END
 
-nnoremap <F5>    :buffers<CR>:buffer<Space>
-noremap  <F6>    :set list!<CR>
-inoremap <F6>    <C-o>:set list!<CR>
-cnoremap <F6>    <C-c>:set list!<CR>
-nmap     <C-H>   :bprev<CR>
-nmap     <C-L>   :bnext<CR>
+nnoremap <F5> :buffers<CR>:buffer<Space>
+noremap  <F6> :set list!<CR>
+inoremap <F6> <C-o>:set list!<CR>
+cnoremap <F6> <C-c>:set list!<CR>
+nmap <C-H> :bprev<CR>
+nmap <C-L> :bnext<CR>
 "nnoremap <left>  <nop>
 "nnoremap <right> <nop>
 "nnoremap <up>    <nop>
 "nnoremap <down>  <nop>
+nmap ' :Bonly<CR>
+nmap ; :Buffers<CR>
+nmap <Leader>f :Files<CR>
