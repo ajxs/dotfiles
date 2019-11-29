@@ -48,8 +48,8 @@ set cmdheight=1
 
 " GUI config.
 set guifont=Inconsolata
-set tb=
 set linespace=-1
+set guioptions -=T
 
 " Configure syntax.
 syntax enable
