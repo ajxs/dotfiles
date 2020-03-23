@@ -11,7 +11,6 @@ call plug#begin('~/.vim/bundle')
 Plug 'Raimondi/delimitMate'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
-"Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'ap/vim-buftabline'
 Plug 'schickling/vim-bufonly'
@@ -22,16 +21,13 @@ Plug 'junegunn/fzf.vim'
 " Colorschemes
 Plug 'jnurmine/Zenburn'
 Plug 'seesleestak/duo-mini'
-Plug 'davidosomething/vim-colors-meh'
 Plug 'junegunn/seoul256.vim'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
-Plug 'sansbrina/vim-garbage-oracle', { 'branch': 'release' }
 Plug 'sainnhe/vim-color-forest-night'
 Plug 'KKPMW/sacredforest-vim'
 Plug 'sts10/vim-pink-moon'
 Plug 'tomasiser/vim-code-dark'
 Plug 'romainl/Apprentice'
-
 
 call plug#end()
 
@@ -59,9 +55,6 @@ syntax on
 let g:limelight_paragraph_span = 3
 autocmd VimEnter * Limelight
 
-" Airline
-" let g:airline#extensions#tabline#enabled = 1
-
 set noshowmode
 set laststatus=2
 
@@ -69,8 +62,7 @@ set laststatus=2
 set colorcolumn=90
 set list
 set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
-" colorscheme seoul256
-colorscheme apprentice
+colorscheme seoul256
 
 " Remove trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
@@ -91,10 +83,6 @@ inoremap <F6> <C-o>:set list!<CR>
 cnoremap <F6> <C-c>:set list!<CR>
 nmap <C-H> :bprev<CR>
 nmap <C-L> :bnext<CR>
-"nnoremap <left>  <nop>
-"nnoremap <right> <nop>
-"nnoremap <up>    <nop>
-"nnoremap <down>  <nop>
 nmap ' :Bonly<CR>
 nmap ; :Buffers<CR>
 nmap <Leader>f :Files<CR>
