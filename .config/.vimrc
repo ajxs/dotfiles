@@ -35,6 +35,8 @@ call plug#end()
 set nu
 set relativenumber
 
+set cursorline
+
 filetype plugin indent on
 set autoindent
 set laststatus=2
