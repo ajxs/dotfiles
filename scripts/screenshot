@@ -1,0 +1,51 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+use Getopt::Long;
+
+# Creates a screenshot and saves it in the $HOME/Pictures directory.
+# Automatically copies the filename to the clipboard.
+
+
+use constant {
+	PICTURES_DIR => "$ENV{HOME}/Pictures",
+	SCREENSHOT_UTIL => "/usr/bin/scrot",
+	CLIPBOARD_UTIL => "xclip -sel clip",
+	NOTIFY_UTIL => "notify-send"
+};
+
+
+sub notify_error {
+	my ($error_text) = @_;
+	system (NOTIFY_UTIL, $error_text);
+	die $error_text;
+}
+
+
+# Whether only a region of the screen is being screenshotted.
+my $region = 0;
+# The quality of the resulting screenshot image.
+my $quality = 100;
+
+GetOptions('quality=i' => \$quality,
+	'region' => \$region);
+
+
+my $timestamp = localtime(time);
+$timestamp =~ s/\s/_/g;
+my $screenshot_filename = PICTURES_DIR . "/screenshot_$timestamp.jpg";
+
+my @screenshot_cmd = (SCREENSHOT_UTIL);
+push @screenshot_cmd, "-q $quality";
+push @screenshot_cmd, "-s" if $region;
+push @screenshot_cmd, $screenshot_filename;
+
+
+my $exit_status = system @screenshot_cmd;
+notify_error "Unable to execute screenshot!" if $exit_status != 0;
+system (NOTIFY_UTIL, "Screenshot written to $screenshot_filename");
+
+open my $clipboard_stream, "|-", CLIPBOARD_UTIL
+	or notify_error "Unable to open clipboard stream!";
+print $clipboard_stream "$screenshot_filename"
