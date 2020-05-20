@@ -1,0 +1,113 @@
+#!/usr/bin/env python3
+
+"""
+Template for creating Ada records.
+"""
+
+def get_item_size(item_type):
+    """
+    Gets the size of an item based upon its type.
+    """
+
+    if item_type == "Boolean":
+        return 1
+    elif item_type == "Unsigned_8":
+        return 8
+    elif item_type == "Unsigned_16":
+        return 16
+    elif item_type == "Unsigned_32":
+        return 32
+    else:
+        raise ValueError("Unrecognised type value")
+
+def print_record(record_name, record_items):
+    """
+    Prints the record and its accompanying representation clause to STDOUT
+    based upon the input.
+    """
+
+    # The size of the record, in bits.
+    record_size = 0
+    # The width of the starting indexes in the record representation clause.
+    # This value is used to vertically align all of the values.
+    start_index_print_width = 1
+
+    # The length of the longest item name in the record.
+    # This is used for vertically aligning the items.
+    longest_length = 0
+    for item in record_items:
+        if len(item[0]) > longest_length:
+            longest_length = len(item[0])
+
+    # Print record header.
+    print("type {} is".format(record_name))
+    print("   record")
+
+    for item in record_items:
+        item_size = get_item_size(item[1])
+        record_size += item_size
+
+        print("      {0: <{width}} : {1};".format(
+            item[0],
+            item[1],
+            width=longest_length
+        ))
+
+    print("   end record")
+    print("with Size => {};".format(record_size))
+
+    # Print record representation clause.
+    print("for {} use".format(record_name))
+    print("   record")
+
+    # Get representation clause starting index.
+    if record_size < 10:
+        start_index_print_width = 1
+    elif record_size < 99:
+        start_index_print_width = 2
+    else:
+        start_index_print_width = 3
+
+    # The current index into the record. This is incremented according to the size
+    # of each member.
+    curr_item_start = 0
+    # The end of the current item's bits.
+    curr_item_end = 0
+
+    for item in record_items:
+        item_size = get_item_size(item[1])
+        curr_item_end = curr_item_start + (item_size - 1)
+
+        print("      {0: <{width}} at 0 range {1: <{index_width}} .. {2};".format(
+            item[0],
+            curr_item_start,
+            curr_item_end,
+            width=longest_length,
+            index_width=start_index_print_width
+        ))
+
+        # Increment the item start.
+        curr_item_start = curr_item_end + 1
+    print("   end record;")
+
+
+if __name__ == "__main__":
+    # The name of the record.
+    RECORD_NAME = "REPLACE_ME"
+    # The items to place in the record.
+    RECORD_ITEMS = [
+        ("Bytes_Per_Sector", "Unsigned_16"),
+        ("Sectors_Per_Cluster", "Unsigned_8"),
+        ("Reserved_Sector_Count", "Unsigned_16"),
+        ("Table_Count", "Unsigned_8"),
+        ("Root_Entry_Count", "Unsigned_16"),
+        ("Total_Sector_Count", "Unsigned_16"),
+        ("Media_Type", "Unsigned_8"),
+        ("Table_Size", "Unsigned_16"),
+        ("Sectors_Per_Track", "Unsigned_16"),
+        ("Head_Side_Count", "Unsigned_16"),
+        ("Hidden_Sector_Count", "Unsigned_32"),
+        ("Large_Sector_Count", "Unsigned_32")
+    ]
+
+    print_record(RECORD_NAME, RECORD_ITEMS)
