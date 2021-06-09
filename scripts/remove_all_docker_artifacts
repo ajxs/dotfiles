@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+docker network prune -f
+docker system prune --volumes -f
