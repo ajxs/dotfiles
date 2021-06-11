@@ -47,8 +47,6 @@
 		"editor.insertSpaces": false,
 		"files.trimTrailingWhitespace": true
 	},
-	"C_Cpp.default.cStandard": "c99",
-	"C_Cpp.default.intelliSenseMode": "gcc-x64",
 	"javascript.updateImportsOnFileMove.enabled": "always",
 	"java.configuration.checkProjectSettingsExclusions": false,
 	"typescript.updateImportsOnFileMove.enabled": "always",
@@ -56,7 +54,6 @@
 	"editor.insertSpaces": false,
 	"editor.minimap.enabled": false,
 	"editor.lineHeight": 14,
-	"search.location": "panel",
 	"editor.renderWhitespace": "all",
 	"editor.rulers": [
 		90
@@ -70,7 +67,7 @@
 		"**/CVS": true,
 		"**/.DS_Store": true
 	},
-	"window.menuBarVisibility": "hidden",
+	"window.menuBarVisibility": "toggle",
 	"window.zoomLevel": 0,
 	"workbench.activityBar.visible": false,
 	"workbench.editor.highlightModifiedTabs": true,
