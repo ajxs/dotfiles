@@ -15,8 +15,6 @@ Plug 'junegunn/limelight.vim'
 Plug 'ap/vim-buftabline'
 Plug 'schickling/vim-bufonly'
 Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 
 " Colorschemes
 Plug 'jnurmine/Zenburn'
@@ -45,9 +43,11 @@ set showmatch
 set cmdheight=1
 
 " GUI config.
-set guifont=Inconsolata
-set linespace=-1
-set guioptions -=T
+if has("gui_running")
+  set guifont=Inconsolata
+  set linespace=-1
+  set guioptions -=T
+endif
 
 " Configure syntax.
 syntax enable
