@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+
+source "${PWD}/_shared.sh"
+
+echo "Setting up user configuration..."
+prompt_to_confirm
+
+config_dir="${HOME}/src/dotfiles/.config"
+vim_lang_config_dir="${HOME}/.vim/ftplugin"
+i3_config_dir="${HOME}/.config/i3"
+i3status_config_dir="${HOME}/.config/i3status"
+
+
+# Checks if a symbolic link to a config file exists, creates it if it doesn't.
+function create_config_symlink {
+	local source_file="${1}"
+	local link_file="${2}"
+
+	if [ ! -e "${link_file}" ]; then
+		sudo ln -s "${source_file}" "${link_file}"
+		echo "Created symbolic link: ${source_file} -> ${link_file}"
+	else
+		echo "Symbolic link already exists."
+	fi
+}
+
+echo "Setting up Git config..."
+create_config_symlink "${config_dir}/.gitconfig" "${HOME}/.gitconfig"
+
+echo "Setting up Git alias config..."
+create_config_symlink "${config_dir}/.gitconfig_aliases" "${HOME}/.gitconfig_aliases"
+
+echo "Setting up i3 config..."
+if [ ! -d "${i3_config_dir}" ]; then
+	mkdir -p "${i3_config_dir}"
+	echo "Created: ${i3_config_dir}"
+else
+	echo "i3 config directory already exists."
+fi
+
+create_config_symlink "${config_dir}/i3.conf" "${i3_config_dir}/config"
+
+
+echo "Setting up i3 status config..."
+if [ ! -d "${i3status_config_dir}" ]; then
+	mkdir -p "${i3status_config_dir}"
+	echo "Created: ${i3status_config_dir}"
+else
+	echo "i3 status config directory already exists."
+fi
+
+create_config_symlink "${config_dir}/i3status.conf" "${i3status_config_dir}/config"
+
+
+echo "Setting up X configuration..."
+create_config_symlink "${config_dir}/.Xresources" "${HOME}/.Xresources"
+
+echo "Loading X configuration..."
+xrdb "${HOME}/.Xresources"
+
+
+echo "Setting up GTK configuration..."
+create_config_symlink "${config_dir}/.gtkrc-2.0" "${HOME}/.gtkrc-2.0"
+
+
+echo "Setting up Vim configuration..."
+create_config_symlink "${config_dir}/.vimrc" "${HOME}/.vimrc"
+
+
+echo "Setting up Vim language config..."
+if [ ! -d "${vim_lang_config_dir}" ]; then
+	mkdir -p "${vim_lang_config_dir}"
+	echo "Created: ${vim_lang_config_dir}"
+else
+	echo "Vim language config directory already exists."
+fi
+
+create_config_symlink "${config_dir}/vim/ada.vim" "${vim_lang_config_dir}/ada.vim"
+
+echo "Setting up VSCodium config..."
+create_config_symlink "${config_dir}/vscode.json" "${HOME}/.config/VSCodium/User/settings.json"

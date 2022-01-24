@@ -1,9 +1,5 @@
-[alias]
-	cam = commit -am
-	cm = commit -m
-	st = status
-	aa = add -A
-	uc = reset HEAD~
+[include]
+	path = "./.gitconfig_aliases"
 [color]
 	ui = always
 	status = always
