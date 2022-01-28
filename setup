@@ -10,6 +10,8 @@ vim_lang_config_dir="${HOME}/.vim/ftplugin"
 i3_config_dir="${HOME}/.config/i3"
 i3status_config_dir="${HOME}/.config/i3status"
 
+check_install_package "vim"
+check_install_package "git"
 
 # Checks if a symbolic link to a config file exists, creates it if it doesn't.
 function create_config_symlink {
