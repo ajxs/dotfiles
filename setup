@@ -10,6 +10,8 @@ vim_lang_config_dir="${HOME}/.vim/ftplugin"
 i3_config_dir="${HOME}/.config/i3"
 i3status_config_dir="${HOME}/.config/i3status"
 
+check_install_package "vim"
+check_install_package "git"
 
 # Checks if a symbolic link to a config file exists, creates it if it doesn't.
 function create_config_symlink {
@@ -18,9 +20,9 @@ function create_config_symlink {
 
 	if [ ! -e "${link_file}" ]; then
 		sudo ln -s "${source_file}" "${link_file}"
-		echo "Created symbolic link: ${source_file} -> ${link_file}"
+		echo "Created symbolic link '${source_file}' -> '${link_file}'"
 	else
-		echo "Symbolic link already exists."
+		echo "Symbolic link '${link_file}' already exists."
 	fi
 }
 
@@ -31,24 +33,12 @@ echo "Setting up Git alias config..."
 create_config_symlink "${config_dir}/.gitconfig_aliases" "${HOME}/.gitconfig_aliases"
 
 echo "Setting up i3 config..."
-if [ ! -d "${i3_config_dir}" ]; then
-	mkdir -p "${i3_config_dir}"
-	echo "Created: ${i3_config_dir}"
-else
-	echo "i3 config directory already exists."
-fi
-
+mkdir -p "${i3_config_dir}"
 create_config_symlink "${config_dir}/i3.conf" "${i3_config_dir}/config"
 
 
 echo "Setting up i3 status config..."
-if [ ! -d "${i3status_config_dir}" ]; then
-	mkdir -p "${i3status_config_dir}"
-	echo "Created: ${i3status_config_dir}"
-else
-	echo "i3 status config directory already exists."
-fi
-
+mkdir -p "${i3status_config_dir}"
 create_config_symlink "${config_dir}/i3status.conf" "${i3status_config_dir}/config"
 
 
@@ -68,13 +58,7 @@ create_config_symlink "${config_dir}/.vimrc" "${HOME}/.vimrc"
 
 
 echo "Setting up Vim language config..."
-if [ ! -d "${vim_lang_config_dir}" ]; then
-	mkdir -p "${vim_lang_config_dir}"
-	echo "Created: ${vim_lang_config_dir}"
-else
-	echo "Vim language config directory already exists."
-fi
-
+mkdir -p "${vim_lang_config_dir}"
 create_config_symlink "${config_dir}/vim/ada.vim" "${vim_lang_config_dir}/ada.vim"
 
 echo "Setting up VSCodium config..."
