@@ -29,9 +29,12 @@ current_dir="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)"
 if [ -f "/etc/arch-release" ]; then
 	source "${current_dir}/_shared.arch.sh"
 	detected_system="ARCH"
-elif [ -f "/etc/lsb-release" ]; then
+elif [ -f "/etc/debian_version" ]; then
 	source "${current_dir}/_shared.deb.sh"
 	detected_system="DEBIAN"
+elif [ -f "/etc/lsb-release" ]; then
+	source "${current_dir}/_shared.deb.sh"
+	detected_system="UBUNTU"
 elif [ -f "/etc/redhat-release" ]; then
 	source "${current_dir}/_shared.fedora.sh"
 	detected_system="FEDORA"
