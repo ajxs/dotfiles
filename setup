@@ -10,9 +10,12 @@ vim_lang_config_dir="${HOME}/.vim/ftplugin"
 i3_config_dir="${HOME}/.config/i3"
 i3status_config_dir="${HOME}/.config/i3status"
 
-check_install_package "git"
-check_install_package "maim"
-check_install_package "vim"
+software_to_install="git maim ncdu pasystray pavucontrol redshift-gtk vim"
+for item in $software_to_install 
+do
+	check_install_package "${item}"
+done
+
 
 # Checks if a symbolic link to a config file exists, creates it if it doesn't.
 function create_config_symlink {
