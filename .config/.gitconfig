@@ -1,12 +1,27 @@
 [include]
 	path = "./.gitconfig_aliases"
 [color]
-	ui = always
-	status = always
 	branch = always
 	diff = always
 	interactive = always
+	status = always
+	ui = always
 [core]
 	editor = vim
+[diff]
+	algorithm = histogram
+[fetch]
+	fsckobjects = true
+[init]
+	defaultBranch = master
+[merge]
+	conflictstyle = zdiff3
 [push]
 	default = simple
+[receive]
+	fsckObjects = true
+[transfer]
+	fsckobjects = true
+[user]
+	name = Anthony
+	email = ajxs@panoptic.online
