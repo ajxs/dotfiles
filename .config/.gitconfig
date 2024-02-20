@@ -1,5 +1,6 @@
 [include]
 	path = "./.gitconfig_aliases"
+	path = "./.gitconfig_user"
 [color]
 	branch = always
 	diff = always
@@ -22,6 +23,3 @@
 	fsckObjects = true
 [transfer]
 	fsckobjects = true
-[user]
-	name = Anthony
-	email = ajxs@panoptic.online
