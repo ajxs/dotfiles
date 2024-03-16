@@ -9,6 +9,7 @@
 	ui = always
 [core]
 	editor = vim
+	fileMode = false
 [diff]
 	algorithm = histogram
 [fetch]
