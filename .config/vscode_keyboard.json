@@ -1,0 +1,11 @@
+[
+	{
+		"key": "alt+ctrl+x",
+		"command": "editor.action.deleteLines",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "ctrl+k ctrl+w",
+		"command": "workbench.action.closeOtherEditors"
+	}
+]
